@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void display() {
+    if (head == NULL) {
+        cout << "List is empty";
+        return;
+    }
+    Node* temp = head;
+    do {
+        cout << temp->data << " ";
+        temp = temp->next;
+    } while (temp != head);
+    cout << head->data << endl;
+}
+
+int main() {
+    insert(10);
+    insert(20);
+    insert(30);
+    insert(40);
+    display();
+    return 0;
+}
