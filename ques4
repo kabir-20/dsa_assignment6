@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+class DoublyLinkedList {
+    struct Node {
+        char data;
+        Node* prev;
+        Node* next;
+    };
+    Node* head;
+    Node* tail;
+
+public:
+    DoublyLinkedList() {
+        head = NULL;
+        tail = NULL;
+    }
+
+    void create(int n) {
+        for (int i = 0; i < n; i++) {
+            char ch;
+            cout << "Enter character: ";
+            cin >> ch;
+            Node* newNode = new Node{ch, NULL, NULL};
+            if (head == NULL) {
+                head = newNode;
+                tail = newNode;
+            } else {
+                tail->next = newNode;
+                newNode->prev = tail;
+                tail = newNode;
+            }
+        }
+    }
+
+    void checkPalindrome() {
+        if (head == NULL) {
+            cout << "List is empty" << endl;
+            return;
+        }
+
+        Node* start = head;
+        Node* end = tail;
+        bool isPal = true;
+
+        while (start != end && end->next != start) {
+            if (start->data != end->data) {
+                isPal = false;
+                break;
+            }
+            start = start->next;
+            end = end->prev;
+        }
+
+        if (isPal)
+            cout << "The list is a palindrome" << endl;
+        else
+            cout << "The list is not a palindrome" << endl;
+    }
+};
+
+int main() {
+    DoublyLinkedList list;
+    int n;
+    cout << "Enter number of characters: ";
+    cin >> n;
+    list.create(n);
+    list.checkPalindrome();
+    return 0;
+}
